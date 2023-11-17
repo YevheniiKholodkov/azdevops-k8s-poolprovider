@@ -47,7 +47,7 @@ func (c *AzurePipelinesPoolclient) AddNewPodForCR(obj *AzurePipelinesPool, label
 			Containers: []v1.Container{
 				{
 					Name:  "vsts-agent",
-					Image: "prebansa/myagent:v1",
+					Image: "ykholodkov/myagent:v1",
 				},
 			},
 		}

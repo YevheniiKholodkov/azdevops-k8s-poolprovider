@@ -102,7 +102,7 @@ func CreateDummyPod(isbuildkit bool) {
 			Containers: []v1.Container{
 				{
 					Name:  "agentimage",
-					Image: "prebansa/myagent:v5.16",
+					Image: "ykholodkov/myagent:v5.16",
 				},
 			},
 		},

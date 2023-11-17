@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
       - name: vsts-agent
-        image: prebansa/myagent:v5.17
+        image: ykholodkov/myagent:v5.17

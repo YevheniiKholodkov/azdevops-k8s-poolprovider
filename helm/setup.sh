@@ -17,7 +17,7 @@ usage() {
     exit 0;
     }
 
-namespaceval="azuredevops"
+namespaceval="azdevops"
 
 if [ "$#" -lt "3" ]
 then
@@ -72,21 +72,22 @@ then
     fi
 fi
 
-helm install k8s-poolprovidercrd --name-template k8spoolprovidercrd --set "azurepipelines.VSTS_SECRET=$sharedsecretval" --set "app.namespace=$namespaceval"
+helm install k8s-poolprovidercrd --name-template k8spoolprovidercrd --set "azurepipelines.VSTS_SECRET=$sharedsecretval" --set "app.namespace=$namespaceval"  || { echo 'Failed to install k8spoolprovidercrd' ; exit 1; }
 echo "K8s-poolprovidercrd helm chart installed"
 
 sed -i 's/\(.*namespace:.*\)/  namespace: '$namespaceval'/g' k8s-poolprovidercrd/azurepipelinescr/azurepipelinespool_cr.yaml
 
-kubectl apply -f k8s-poolprovidercrd/azurepipelinescr/azurepipelinespool_cr.yaml
+kubectl apply -f k8s-poolprovidercrd/azurepipelinescr/azurepipelinespool_cr.yaml  || { echo 'Failed to apply custom resource' ; exit 1; }
 echo "Custom resource yaml applied"
 
-helm repo add stable https://kubernetes-charts.storage.googleapis.com 
+helm repo add stable https://charts.helm.sh/stable
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 echo "Stable repo added"
 
 helm repo update
 echo "Helm repo updated"
 
-helm install stable/nginx-ingress --generate-name --namespace $namespaceval
+helm install ingress-nginx/ingress-nginx --generate-name --namespace $namespaceval
 echo "Installed nginx-ingress"
 
 cnt=0

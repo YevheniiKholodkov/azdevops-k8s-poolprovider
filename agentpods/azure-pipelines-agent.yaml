@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: vsts-agent
-    image: prebansa/myagent:v5.16
+    image: ykholodkov/myagent:v5.16
     env:
     - name: RUNNING_ON
       valueFrom:

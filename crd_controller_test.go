@@ -35,7 +35,7 @@ func SetupCustomResource() {
 			Namespace: namespace,
 		},
 		Spec: v1alpha1.AzurePipelinesPoolSpec{
-			ControllerName:       "prebansa/webserverimage",
+			ControllerName:       "ykholodkov/webserverimage",
 			BuildkitReplicaCount: 1,
 			AgentPools: []v1alpha1.AgentPoolSpec{
 				{
@@ -44,7 +44,7 @@ func SetupCustomResource() {
 						Containers: []corev1.Container{
 							{
 								Name:  "vsts-agent",
-								Image: "prebansa/myagent:v5.16",
+								Image: "ykholodkov/myagent:v5.16",
 							},
 						},
 					},
